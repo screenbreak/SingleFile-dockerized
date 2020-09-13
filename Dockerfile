@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
       python3 python3-pip python3-setuptools
 
 COPY requirements.txt .
+COPY webserver.py .
 
 RUN pip3 install \
     --no-cache-dir \
