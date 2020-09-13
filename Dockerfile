@@ -20,3 +20,5 @@ RUN pip3 install \
     -r requirements.txt
 
 RUN rm requirements.txt
+
+ENTRYPOINT /node_modules/single-file/cli/single-file --browser-executable-path=/opt/google/chrome/google-chrome --browser-args='["--no-sandbox"]' --dump-content
