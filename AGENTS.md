@@ -1,5 +1,34 @@
 # Screenbreak agent rules: SingleFile-dockerized
 
+## Migration gate before v2 product development
+
+The full relational data and every stored file are moving to Doltgres under
+[migration issue #114](https://github.com/screenbreak/webapp/issues/114).
+This is the prerequisite for the next v2 product-development stage. A running
+import or a validated sparse pilot is not a complete shared baseline. Wait for
+full row/file reconciliation, real application/storage checks and Nikos's
+designation of the verified database baseline; the required runtime/profile
+must also be accepted into `dev` before ordinary features rely on it.
+
+Planning, documentation, review and explicitly assigned migration validation
+can continue during the import. Preserve existing feature branches and PRs.
+Do not use its in-progress target as a shared development database.
+
+After the gate, pair each application-backed task's Git feature branch with its
+own writable Doltgres branch created from the designated verified baseline.
+Record the issue, Git revision, database branch/starting commit and schema
+revision. Connect each app/worker/test explicitly to its assigned database branch;
+do not change shared/default checkout state. Records and binary file contents
+belong to that same branch. The full baseline and retained legacy source remain
+protected; accepting Git changes does not automatically merge database changes.
+An extension-only task uses the documented test API/backend branch and does not
+need to create a database server. Private connection settings stay outside Git.
+
+Follow the migration branch's
+[workflow](https://github.com/screenbreak/webapp/blob/codex/doltgres-data-migration/tools/doltgres_migration/README.md)
+and its validated operator handoff. Progress updates come from the separate
+migration session; never infer completion from an old status post.
+
 ## Team authority
 
 These rules apply equally to Codex, Claude and other agents. Authority belongs
